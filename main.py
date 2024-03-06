@@ -18,10 +18,12 @@ def get_data(i):
         return response.json()
 
 
-def task_for_each_process(_):
+def task_for_each_process(process_index):
     global NUMBER_OF_THREADS_PER_PROCESS
     with concurrent.futures.ThreadPoolExecutor(max_workers=NUMBER_OF_THREADS_PER_PROCESS) as executor:
-        product_data = list(executor.map(get_data, range(1, NUMBER_OF_THREADS_PER_PROCESS + 1)))
+        start_index = (process_index - 1) * NUMBER_OF_THREADS_PER_PROCESS + 1
+        end_index = process_index * NUMBER_OF_THREADS_PER_PROCESS + 1
+        product_data = list(executor.map(get_data, range(start_index, end_index)))
     return product_data
 
 
