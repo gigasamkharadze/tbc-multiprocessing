@@ -8,12 +8,12 @@ NUMBER_OF_PROCESSES = 5
 NUMBER_OF_THREADS_PER_PROCESS = 20
 
 
-def get_data(i):
+def get_data(object_index):
     try:
-        response = requests.get(URL + str(i))
+        response = requests.get(URL + str(object_index))
         response.raise_for_status()
     except requests.RequestException as e:
-        print(f"Error fetching data from URL: {URL + str(i)}: {e}")
+        print(f"Error fetching data from URL: {URL + str(object_index)}: {e}")
     else:
         return response.json()
 
